@@ -7,11 +7,11 @@ import android.widget.TextView;
 import com.example.ngan.basicproject.R;
 import com.example.ngan.basicproject.common.Utils;
 import com.example.ngan.basicproject.m.eventbus.SetTitleMessage;
-import com.example.ngan.basicproject.network.OnPostResponseListener;
-import com.example.ngan.basicproject.network.services.ApiResponseCode;
-import com.example.ngan.basicproject.network.services.ApiTask;
-import com.example.ngan.basicproject.network.services.ApiTaskType;
 import com.example.ngan.basicproject.p.LoginPresenter;
+import com.example.ngan.basicproject.p.network.OnPostResponseListener;
+import com.example.ngan.basicproject.p.network.services.ApiResponseCode;
+import com.example.ngan.basicproject.p.network.services.ApiTask;
+import com.example.ngan.basicproject.p.network.services.ApiTaskType;
 import com.example.ngan.basicproject.v.fragment.ProfileScreen;
 
 import org.greenrobot.eventbus.EventBus;
@@ -34,12 +34,13 @@ public class MainActivity extends BaseActivity implements OnPostResponseListener
         mUnbinder = ButterKnife.bind(this);
         //initialize LoginPresenter
         mPresenter = new LoginPresenter(this, this);
+        mPresenter.login("+841678827383");
 
         // Register Events
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
-        Utils.addFragment(R.id.main_content_container, new ProfileScreen(), "", this);
+        Utils.addFragment(R.id.main_content_container, new ProfileScreen(), "profile", this);
     }
 
     @Override

@@ -1,10 +1,11 @@
 package com.example.ngan.basicproject.p;
 
 import android.content.Context;
+import android.util.Log;
 
-import com.example.ngan.basicproject.network.OnResponseListener;
-import com.example.ngan.basicproject.network.services.ApiTask;
-import com.example.ngan.basicproject.network.services.ApiTaskType;
+import com.example.ngan.basicproject.p.network.OnResponseListener;
+import com.example.ngan.basicproject.p.network.services.ApiTask;
+import com.example.ngan.basicproject.p.network.services.ApiTaskType;
 
 import retrofit2.Call;
 
@@ -22,21 +23,19 @@ public class LoginPresenter extends BasePresenter {
 
     /**
      * Login
-     *
-     * @param email    String
-     * @param password String
      */
-    public void login(final String email, final String password) {
+    public void login(final String phone) {
         ApiTask.execute(new ApiTask.OnCreateCallCallback() {
             @Override
             public Call onCreateCall() {
-                return createLoginRequest(email, password);
+                return createLoginRequest(phone);
             }
         }, ApiTaskType.LOGIN, this);
     }
 
     @Override
     public boolean onPostResponse(ApiTask task, int status) {
+        Log.i("RLV login", status + "");
         return mListener.onResponse(task, status);
     }
 

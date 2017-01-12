@@ -1,6 +1,6 @@
-package com.example.ngan.basicproject.network;
+package com.example.ngan.basicproject.p.network;
 
-import com.example.ngan.basicproject.network.services.ApiTask;
+import com.example.ngan.basicproject.p.network.services.ApiTask;
 
 /**
  * Copyright HoanVu Solutions

@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 
 
 import com.example.ngan.basicproject.common.Utils;
-import com.example.ngan.basicproject.network.OnPostResponseListener;
-import com.example.ngan.basicproject.network.OnResponseListener;
-import com.example.ngan.basicproject.network.services.ApiResponseCode;
-import com.example.ngan.basicproject.network.services.ApiTask;
+import com.example.ngan.basicproject.p.network.OnPostResponseListener;
+import com.example.ngan.basicproject.p.network.OnResponseListener;
+import com.example.ngan.basicproject.p.network.services.ApiResponseCode;
+import com.example.ngan.basicproject.p.network.services.ApiTask;
 import com.example.ngan.basicproject.v.activity.MainActivity;
 
 import butterknife.Unbinder;

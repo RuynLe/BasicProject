@@ -18,10 +18,10 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
 
-import com.example.ngan.basicproject.network.OnPostResponseListener;
-import com.example.ngan.basicproject.network.OnResponseListener;
-import com.example.ngan.basicproject.network.services.ApiResponseCode;
-import com.example.ngan.basicproject.network.services.ApiTask;
+import com.example.ngan.basicproject.p.network.OnPostResponseListener;
+import com.example.ngan.basicproject.p.network.OnResponseListener;
+import com.example.ngan.basicproject.p.network.services.ApiResponseCode;
+import com.example.ngan.basicproject.p.network.services.ApiTask;
 import com.example.ngan.basicproject.v.fragment.BaseFragment;
 
 import java.security.MessageDigest;
@@ -29,7 +29,6 @@ import java.security.NoSuchAlgorithmException;
 
 import butterknife.Unbinder;
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 public abstract class BaseActivity extends AppCompatActivity implements OnResponseListener {
     /**

@@ -3,18 +3,12 @@ package com.example.ngan.basicproject.p;
 import android.content.Context;
 
 import com.example.ngan.basicproject.application.BaseApplication;
-import com.example.ngan.basicproject.m.response.BaseResponse;
-import com.example.ngan.basicproject.network.services.ApiResponseCallback;
-import com.example.ngan.basicproject.network.services.ApiResponseCode;
-import com.example.ngan.basicproject.network.services.ApiService;
-import com.example.ngan.basicproject.network.services.ApiTask;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.example.ngan.basicproject.p.network.services.ApiResponseCallback;
+import com.example.ngan.basicproject.p.network.services.ApiResponseCode;
+import com.example.ngan.basicproject.p.network.services.ApiService;
+import com.example.ngan.basicproject.p.network.services.ApiTask;
 
 import io.realm.Realm;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -25,7 +19,6 @@ import retrofit2.Response;
  */
 
 abstract class BasePresenter implements ApiResponseCallback {
-    static Map<String, String> mHeaders;
     final Context mContext;
     /**
      * The Api Service
@@ -35,6 +28,7 @@ abstract class BasePresenter implements ApiResponseCallback {
      * Realm Instance
      */
     final Realm mRealm;
+
     /**
      * Default Constructor
      *
@@ -44,30 +38,15 @@ abstract class BasePresenter implements ApiResponseCallback {
         mContext = context;
         mRealm = Realm.getDefaultInstance();
         mService = BaseApplication.getInstance().getService();
-        if (mHeaders == null) {
-            loadDeviceInfo();
-        }
     }
 
-    /**
-     * Load Device Info
-     */
-    private void loadDeviceInfo() {
-        mHeaders = new HashMap<>();
-        mHeaders.put("X-DEVICE-ID", "123456");
-        mHeaders.put("X-OS-TYPE", "IOS");
-        mHeaders.put("X-OS-VERSION", "9.0");
-        mHeaders.put("X-API-ID", "abc");
-        mHeaders.put("X-API-KEY", "123");
-        mHeaders.put("X-APP-VERSION", "1.0");
-    }
 
     /**
      * Parse Response
      *
      * @param response BaseResponse
      */
-    protected void parseResponse(BaseResponse response) {
+    protected void parseResponse(Response response) {
         /*try {
             Method method = this.getClass().getMethod(
                     "processResponse", response.getData().getClass());
@@ -77,7 +56,7 @@ abstract class BasePresenter implements ApiResponseCallback {
             Crashlytics.logException(e);
         }*/
 
-        Object data = response.getData();
+        Object data = response.body();
 
 //        if (data instanceof RegisterResponse) {
 //            processResponse((RegisterResponse) data);
@@ -104,29 +83,31 @@ abstract class BasePresenter implements ApiResponseCallback {
 
         if (response != null &&
                 response.code() == 200) {
-            status = ((BaseResponse) response.body()).getCode();
+            status = (response.code());
 
             if (status == ApiResponseCode.SUCCESS) {
-                parseResponse((BaseResponse) response.body());
+                parseResponse(response);
             }
         }
 
         return onPostResponse(task, status);
     }
+
     /**
      * Create Login Request
      *
-     * @param email String
-     * @param pass  String
      * @return Call
      */
-    protected Call createLoginRequest(String email, String pass) {
-        Map<String, RequestBody> data = new HashMap<>();
-        data.put("username", RequestBody.create(MediaType.parse("text/plain"), email));
-        data.put("password", RequestBody.create(MediaType.parse("text/plain"), pass));
+    protected Call createLoginRequest(String phone) {
 
-        return mService.login(mHeaders, data);
+        return mService.login(phone);
     }
+
+    protected Call getAuthenticate(String phone) {
+
+        return mService.login(phone);
+    }
+
     /**
      * Process Response
      *

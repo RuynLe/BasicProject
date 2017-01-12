@@ -3,7 +3,7 @@ package com.example.ngan.basicproject.application;
 import android.app.Application;
 
 import com.example.ngan.basicproject.common.Constant;
-import com.example.ngan.basicproject.network.services.ApiService;
+import com.example.ngan.basicproject.p.network.services.ApiService;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;

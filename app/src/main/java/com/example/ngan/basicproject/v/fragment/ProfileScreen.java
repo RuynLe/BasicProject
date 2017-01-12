@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.ngan.basicproject.R;
 import com.example.ngan.basicproject.m.eventbus.SetTitleMessage;
-import com.example.ngan.basicproject.network.OnPostResponseListener;
-import com.example.ngan.basicproject.network.services.ApiResponseCode;
-import com.example.ngan.basicproject.network.services.ApiTask;
-import com.example.ngan.basicproject.network.services.ApiTaskType;
+import com.example.ngan.basicproject.p.network.OnPostResponseListener;
+import com.example.ngan.basicproject.p.network.services.ApiResponseCode;
+import com.example.ngan.basicproject.p.network.services.ApiTask;
+import com.example.ngan.basicproject.p.network.services.ApiTaskType;
 import com.example.ngan.basicproject.p.LoginPresenter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,7 +53,7 @@ public class ProfileScreen extends BaseFragment implements OnPostResponseListene
         mPresenter = new LoginPresenter(mActivity, this);
         // Set Title
         EventBus.getDefault().post(new SetTitleMessage(""));
-
+        mActivity.setTitle("Profile");
     }
 
     /**
@@ -79,7 +79,7 @@ public class ProfileScreen extends BaseFragment implements OnPostResponseListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_profile_screen, container, false);
-        mPresenter.login("sonntt079@gmail.com", "123456");
+//        mPresenter.login("sonntt079@gmail.com", "123456");
         return rootView;
     }
 
